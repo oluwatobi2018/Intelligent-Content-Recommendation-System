@@ -1,121 +1,101 @@
-Frontend (Next.js) Application
-This directory contains the Next.js frontend application for our multi-service project. The application provides the user interface and interacts with the backend services to deliver a seamless user experience.
+# Intelligent Content Recommendation System
 
-Table of Contents
-Project Overview
+## Overview
+The Intelligent Content Recommendation System is a SaaS-based platform designed to provide personalized content recommendations based on user interactions and preferences.
 
-Features
+## Features
+- Ingests various content formats (text, images, links, etc.)
+- Tracks user behavior and preferences
+- AI-driven personalized content suggestions
+- Content management dashboard
+- Analytics and insights for content engagement
 
-Getting Started
+---
 
-Prerequisites
+## Setup Instructions
 
-Installation
+### Prerequisites
+Ensure you have the following installed:
+- Python (>=3.8)
+- Node.js (>=14.0)
+- MongoDB (or any preferred database)
+- Redis (for caching, optional but recommended)
 
-Running the Development Server
+### Installation
+1. **Clone the repository**
+   ```sh
+   git clone https://github.com/oluwatobi2018/Intelligent-Content-Recommendation-System.git
+   cd Intelligent-Content-Recommendation-System
+   ```
 
-Building for Production
+2. **Backend Setup**
+   ```sh
+   cd backend
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
 
-Project Structure
+3. **Frontend Setup**
+   ```sh
+   cd frontend
+   npm install
+   npm start
+   ```
 
-Contributing
+4. **Database Setup**
+   - Start MongoDB:
+     ```sh
+     mongod --dbpath=/your/db/path
+     ```
+   - Configure `.env` file with database credentials.
 
-License
+5. **Run the Application**
+   - Start backend:
+     ```sh
+     cd backend
+     python app.py
+     ```
+   - Start frontend:
+     ```sh
+     cd frontend
+     npm start
+     ```
 
-Project Overview
-This Next.js application serves as the frontend for our multi-service system, interfacing with the backend services to provide users with a dynamic and responsive interface. It leverages the power of React and Next.js to deliver server-side rendering, static site generation, and client-side rendering as needed.
+---
 
-Features
-Server-Side Rendering (SSR): Pre-renders pages on the server to improve performance and SEO.
+## Usage Examples
+1. **Upload Content:**
+   - Navigate to `/upload` and add text, images, or links.
+2. **View Recommendations:**
+   - Users will receive personalized suggestions under `/recommendations`.
+3. **Analyze Insights:**
+   - Admins can view content engagement metrics under `/analytics`.
 
-Static Site Generation (SSG): Generates static HTML at build time for faster page loads.
+---
 
-API Routes: Provides backend functionality within the Next.js application.
+## Contribution Guidelines
+### How to Contribute
+1. Fork the repository.
+2. Create a new branch (`feature/your-feature-name`).
+3. Commit your changes with descriptive messages.
+4. Push to your fork and submit a pull request.
 
-CSS Modules & Sass Support: Enables modular and scoped styling using CSS and Sass.
+### Code of Conduct
+- Follow best coding practices.
+- Ensure changes do not break existing functionality.
+- Write meaningful commit messages.
 
-Environment Variables: Manages configuration settings for different environments.
+### Issue Reporting
+- Use GitHub Issues to report bugs and request features.
+- Provide clear descriptions and steps to reproduce issues.
 
-Getting Started
-Prerequisites
-Ensure you have the following installed on your system:
+---
 
-Node.js (version 18.x or later)
+## License
+This project is licensed under the MIT License. See `LICENSE` for details.
 
-npm (comes with Node.js)
+---
 
-Installation
-Clone the Repository:
-
-bash
-Copy
-Edit
-git clone https://github.com/your-username/your-repo.git
-Navigate to the Frontend Directory:
-
-bash
-Copy
-Edit
-cd your-repo/frontend
-Install Dependencies:
-
-bash
-Copy
-Edit
-npm install
-Running the Development Server
-To start the development server:
-
-bash
-Copy
-Edit
-npm run dev
-The application will be running at http://localhost:3000. Any changes you make to the source files will automatically reload the server.
-
-Building for Production
-To create an optimized production build:
-
-bash
-Copy
-Edit
-npm run build
-This will generate a .next directory containing the compiled application. You can then start the production server with:
-
-bash
-Copy
-Edit
-npm start
-Project Structure
-ruby
-Copy
-Edit
-frontend/
-├── public/              # Static assets
-├── pages/               # Page components (routes)
-├── components/          # Reusable React components
-├── styles/              # Global and modular styles
-├── utils/               # Utility functions
-├── hooks/               # Custom React hooks
-├── contexts/            # React context providers
-├── package.json         # Project metadata and dependencies
-├── next.config.js       # Next.js configuration
-└── README.md            # Project documentation
-Contributing
-We welcome contributions to enhance the functionality and quality of this project. To contribute:
-
-Fork the repository.
-
-Create a new branch (git checkout -b feature/YourFeature).
-
-Make your changes.
-
-Commit your changes (git commit -m 'Add some feature').
-
-Push to the branch (git push origin feature/YourFeature).
-
-Open a pull request.
-
-Please ensure your code adheres to the project's coding standards and includes relevant tests.
-
-License
-This project is licensed under the MIT License. You are free to use, modify, and distribute this software in accordance with the license terms.
+## Contact
+For any inquiries, contact [your email] or open an issue.
