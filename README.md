@@ -32,25 +32,30 @@ This platform utilizes machine learning algorithms to analyze user interactions 
    Backend Setup
    cd backend
 npm install
-npm run dev  # Starts the server on localhost:5000
+npm run dev  
+# Starts the server on localhost:5000
 
 frontend Setup
 cd frontend
 npm install
-npm run dev  # Starts the application on localhost:3000
+npm run dev  
+# Starts the application on localhost:3000
 
 AI engine Setup
 cd ai-engine
 pip install -r requirements.txt
-python train.py  # Train the recommendation model
-python api.py    # Start the AI API on localhost:8000
+python train.py  
+# Train the recommendation model
+python api.py   
+# Start the AI API on localhost:8000
 
 Database setup for postgres
 createdb content_recommendation
 psql -d content_recommendation -f database/schema.sql
 
 Database setup for MongoDB
-mongod  # Ensure MongoDB is running
+mongod 
+# Ensure MongoDB is running
 
 API Endpoints
 Authentication
