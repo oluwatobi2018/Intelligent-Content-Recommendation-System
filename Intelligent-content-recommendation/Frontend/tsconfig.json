@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "target": "esnext", // Use the latest JavaScript features
+      "lib": ["dom", "dom.iterable", "esnext"], // Enable DOM and modern JS features
+      "allowJs": true, // Allows JavaScript files
+      "skipLibCheck": true, // Speeds up build process
+      "strict": true, // Enables strict type checking
+      "forceConsistentCasingInFileNames": true, // Enforce consistent file name casing
+      "noEmit": true, // Prevents emitting compiled JS files
+      "esModuleInterop": true, // Ensures compatibility with CommonJS modules
+      "module": "esnext", // Uses latest ECMAScript module system
+      "moduleResolution": "node", // Resolves modules in Node.js style
+      "resolveJsonModule": true, // Allows importing JSON files
+      "isolatedModules": true, // Required for Next.js
+      "jsx": "preserve", // Keeps JSX syntax for Next.js
+      "incremental": true // Enables faster builds with incremental compilation
+    },
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"], // Include all TypeScript files
+    "exclude": ["node_modules"] // Exclude dependencies
+  }
+  
