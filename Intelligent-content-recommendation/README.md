@@ -26,7 +26,7 @@ This platform utilizes machine learning algorithms to analyze user interactions 
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/intelligent-content-recommendation.git
+   git clone https://github.com/Oluwatobi2018/intelligent-content-recommendation.git
    cd intelligent-content-recommendation
 
    Backend Setup
