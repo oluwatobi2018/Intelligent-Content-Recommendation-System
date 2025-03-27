@@ -1,0 +1,36 @@
+{
+    "server": {
+      "port": 5000
+    },
+    "database": {
+      "uri": "mongodb://localhost:27017/content_recommendation",
+      "options": {
+        "useNewUrlParser": true,
+        "useUnifiedTopology": true
+      }
+    },
+    "jwt": {
+      "secret": "your-secret-key",
+      "expiresIn": "1h"
+    },
+    "logging": {
+      "level": "info",
+      "file": "logs/app.log"
+    },
+    "cors": {
+      "origin": ["http://localhost:3000", "https://yourfrontend.com"],
+      "methods": ["GET", "POST", "PUT", "DELETE"],
+      "credentials": true
+    },
+    "api": {
+      "rateLimit": {
+        "windowMs": 60000,
+        "maxRequests": 100
+      }
+    },
+    "ai": {
+      "modelPath": "./models/recommendation_model.pth",
+      "threshold": 0.8
+    }
+  }
+  

@@ -1,0 +1,38 @@
+# Node.js dependencies (handled inside container)
+node_modules/
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Logs
+logs/
+*.log
+npm-debug.log
+yarn-error.log
+
+# Environment variables (avoid exposing secrets)
+.env*
+!env.example  # Allow example env file for reference
+
+# Build artifacts (reduces unnecessary files)
+dist/
+build/
+.cache/
+.next/  # Next.js build output
+out/    # Next.js static export
+
+# Docker-related (ignore overrides & local compose files)
+docker-compose.override.yml
+Dockerfile.dev
+
+# Editor & OS-specific files (reduces clutter)
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Git-related (keep repo clean)
+.git/
+.gitignore
