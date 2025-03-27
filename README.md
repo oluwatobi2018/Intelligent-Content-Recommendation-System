@@ -228,7 +228,7 @@ This project is licensed under the MIT License. See `LICENSE` for details.
 ---
 
 ## Contact
-For any inquiries, contact [your email] or open an issue.
+For any inquiries, contact oluwatobichris88@gmail.com or open an issue.
 
 
 
