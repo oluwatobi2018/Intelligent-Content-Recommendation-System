@@ -9,7 +9,151 @@ The Intelligent Content Recommendation System is a SaaS-based platform designed 
 - AI-driven personalized content suggestions
 - Content management dashboard
 - Analytics and insights for content engagement
+API Overview & AI Features
+🚀 API Details
+Our API provides a robust and scalable solution for delivering intelligent recommendations, user preferences, and content management. It is built using RESTful principles, ensuring smooth integration with frontend applications.
 
+📌 Base URL
+plaintext
+Copy
+Edit
+https://api.example.com
+(For local development: http://localhost:5000)
+
+🛠️ API Endpoints
+🔹 User Management
+1. Get User Preferences
+Endpoint: GET /users/{userId}/preferences
+
+Description: Fetches stored preferences of a user.
+
+Example Request:
+
+bash
+Copy
+Edit
+curl -X GET "https://api.example.com/users/123/preferences"
+Response:
+
+json
+Copy
+Edit
+{
+  "userId": "123",
+  "preferences": ["Tech", "Business"]
+}
+2. Update User Preferences
+Endpoint: PUT /users/{userId}/preferences
+
+Description: Updates a user’s content preferences.
+
+Example Request:
+
+json
+Copy
+Edit
+{
+  "preferences": ["Health", "Education"]
+}
+Response:
+
+json
+Copy
+Edit
+{
+  "message": "Preferences updated successfully"
+}
+🔹 AI-Driven Recommendations
+3. Get Personalized Recommendations
+Endpoint: GET /recommendations?userId={userId}
+
+Description: Fetches AI-powered content recommendations for a user based on their preferences and behavior.
+
+Example Request:
+
+bash
+Copy
+Edit
+curl -X GET "https://api.example.com/recommendations?userId=123"
+Response:
+
+json
+Copy
+Edit
+[
+  {
+    "title": "The Future of AI in Healthcare",
+    "tags": ["Tech", "Health"],
+    "score": 0.89
+  },
+  {
+    "title": "Top 5 Business Strategies for 2025",
+    "tags": ["Business"],
+    "score": 0.78
+  }
+]
+🔹 Content & Utility Endpoints
+4. Fetch All Categories
+Endpoint: GET /categories
+
+Description: Returns a list of all content categories available.
+
+Response:
+
+json
+Copy
+Edit
+["Tech", "Health", "Business", "Education"]
+5. Search Content
+Endpoint: GET /search?query={keyword}
+
+Description: Searches for content based on user input.
+
+Example Request:
+
+bash
+Copy
+Edit
+curl -X GET "https://api.example.com/search?query=AI"
+Response:
+
+json
+Copy
+Edit
+[
+  {
+    "id": "abc123",
+    "title": "How AI is Transforming the World",
+    "tags": ["Tech", "AI"]
+  }
+]
+🤖 AI Features
+🔹 Personalized Content Recommendations
+Uses machine learning algorithms to analyze user preferences and suggest relevant content.
+
+Calculates similarity between a user’s interests and content tags using vector matching.
+
+🔹 Smart Ranking System
+Content is ranked using a similarity scoring model:
+
+User Preferences vs. Content Tags
+
+Behavioral Data Analysis (clicks, likes, reading time)
+
+Trending & Popularity Score
+
+🔹 Adaptive Learning
+The AI system learns over time based on user interactions.
+
+Example: If a user frequently engages with "Tech" content, future recommendations prioritize tech-related articles.
+
+🔹 Context-Aware Search
+Provides relevant search results based on semantic analysis.
+
+Autocomplete & keyword-based filtering for better UX.
+
+🎯 Conclusion
+This API + AI system offers a powerful recommendation engine, delivering a personalized experience for users. The AI-driven features analyze preferences, rank content, and adapt over time, ensuring users always get the most relevant and engaging content.
 ---
 
 ## Setup Instructions
