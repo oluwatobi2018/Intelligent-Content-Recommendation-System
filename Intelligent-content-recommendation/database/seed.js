@@ -3,9 +3,9 @@ const { Pool } = require("pg");
 
 // Database connection configuration
 const pool = new Pool({
-  user: process.env.DB_USER || "your_username",
+  user: process.env.DB_USER || "remmyadeogun",
   host: process.env.DB_HOST || "localhost",
-  database: process.env.DB_NAME || "content_recommendation",
+  database: process.env.DB_NAME || "recommendation_db",
   password: process.env.DB_PASSWORD || "your_password",
   port: Number(process.env.DB_PORT) || 5432,
 });
