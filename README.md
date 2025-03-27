@@ -14,8 +14,8 @@ API Overview & AI Features
 Our API provides a robust and scalable solution for delivering intelligent recommendations, user preferences, and content management. It is built using RESTful principles, ensuring smooth integration with frontend applications.
 
 # 📌 Base URL
-plaintext
 https://api.example.com
+
 (For local development: http://localhost:5000)
 
 # 🛠️ API Endpoints
@@ -26,41 +26,29 @@ Endpoint: GET /users/{userId}/preferences
 Description: Fetches stored preferences of a user.
 
 Example Request:
-
-bash
-Copy
-Edit
 curl -X GET "https://api.example.com/users/123/preferences"
-Response:
 
-json
-Copy
-Edit
+Response:
 {
   "userId": "123",
   "preferences": ["Tech", "Business"]
 }
+
 2. Update User Preferences
 Endpoint: PUT /users/{userId}/preferences
 
 Description: Updates a user’s content preferences.
 
 Example Request:
-
-json
-Copy
-Edit
 {
   "preferences": ["Health", "Education"]
 }
-Response:
 
-json
-Copy
-Edit
+Response:
 {
   "message": "Preferences updated successfully"
 }
+
 # 🔹 AI-Driven Recommendations
 3. Get Personalized Recommendations
 Endpoint: GET /recommendations?userId={userId}
