@@ -9,8 +9,8 @@ The Intelligent Content Recommendation System is a SaaS-based platform designed 
 - AI-driven personalized content suggestions
 - Content management dashboard
 - Analytics and insights for content engagement
-API Overview & AI Features
-🚀 API Details
+# API Overview & AI Features
+# 🚀 API Details
 Our API provides a robust and scalable solution for delivering intelligent recommendations, user preferences, and content management. It is built using RESTful principles, ensuring smooth integration with frontend applications.
 
 # 📌 Base URL
