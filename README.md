@@ -13,14 +13,12 @@ API Overview & AI Features
 🚀 API Details
 Our API provides a robust and scalable solution for delivering intelligent recommendations, user preferences, and content management. It is built using RESTful principles, ensuring smooth integration with frontend applications.
 
-📌 Base URL
+# 📌 Base URL
 plaintext
-Copy
-Edit
 https://api.example.com
 (For local development: http://localhost:5000)
 
-🛠️ API Endpoints
+# 🛠️ API Endpoints
 🔹 User Management
 1. Get User Preferences
 Endpoint: GET /users/{userId}/preferences
@@ -63,7 +61,7 @@ Edit
 {
   "message": "Preferences updated successfully"
 }
-🔹 AI-Driven Recommendations
+# 🔹 AI-Driven Recommendations
 3. Get Personalized Recommendations
 Endpoint: GET /recommendations?userId={userId}
 
@@ -92,7 +90,7 @@ Edit
     "score": 0.78
   }
 ]
-🔹 Content & Utility Endpoints
+# 🔹 Content & Utility Endpoints
 4. Fetch All Categories
 Endpoint: GET /categories
 
@@ -127,13 +125,13 @@ Edit
     "tags": ["Tech", "AI"]
   }
 ]
-🤖 AI Features
+# 🤖 AI Features
 🔹 Personalized Content Recommendations
 Uses machine learning algorithms to analyze user preferences and suggest relevant content.
 
 Calculates similarity between a user’s interests and content tags using vector matching.
 
-🔹 Smart Ranking System
+# 🔹 Smart Ranking System
 Content is ranked using a similarity scoring model:
 
 User Preferences vs. Content Tags
@@ -142,12 +140,12 @@ Behavioral Data Analysis (clicks, likes, reading time)
 
 Trending & Popularity Score
 
-🔹 Adaptive Learning
+# 🔹 Adaptive Learning
 The AI system learns over time based on user interactions.
 
 Example: If a user frequently engages with "Tech" content, future recommendations prioritize tech-related articles.
 
-🔹 Context-Aware Search
+# 🔹 Context-Aware Search
 Provides relevant search results based on semantic analysis.
 
 Autocomplete & keyword-based filtering for better UX.
