@@ -35,51 +35,7 @@ This project is a **SaaS-based AI-powered content recommendation platform** that
 - **Orchestration**: Kubernetes (K8s)
 - **Infrastructure as Code**: Terraform (optional)
 
-## 🏗 Project Structure
 
-```
-📦 Project Root
-├── 📂 backend
-│   ├── 📂 src
-│   │   ├── 📂 controllers
-│   │   ├── 📂 models
-│   │   ├── 📂 routes
-│   │   ├── 📂 services
-│   │   ├── 📂 middleware
-│   │   ├── 📂 config
-│   │   ├── 📂 utils
-│   │   ├── 📂 docs (Swagger API docs)
-│   │   └── app.ts
-│   ├── 📂 database
-│   │   ├── 📂 migrations
-│   │   ├── 📂 seeders
-│   ├── Dockerfile
-│   ├── knexfile.ts
-│   ├── package.json
-├── 📂 frontend
-│   ├── 📂 components
-│   ├── 📂 pages
-│   ├── 📂 hooks
-│   ├── 📂 store
-│   ├── 📂 styles
-│   ├── 📂 utils
-│   ├── 📂 public
-│   ├── Dockerfile
-│   ├── next.config.js
-│   ├── package.json
-├── 📂 k8s
-│   ├── frontend-deployment.yaml
-│   ├── backend-deployment.yaml
-│   ├── service.yaml
-├── 📂 database
-│   ├── 📂 migrations
-│   ├── 📂 seeders
-├── 📜 .dockerignore
-├── 📜 .gitignore
-├── 📜 README.md
-├── 📜 package.json
-└── 📜 docker-compose.yml
-```
 
 ## 🔥 Features
 
