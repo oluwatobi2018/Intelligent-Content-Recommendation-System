@@ -5,7 +5,7 @@ module.exports = {
         host: "127.0.0.1",
         user: "your_user",
         password: "your_password",
-        database: "your_database",
+        database: "recommendation_db",
       },
       migrations: {
         directory: "./database/migrations",
