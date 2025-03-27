@@ -59,6 +59,14 @@ const seedDatabase = async () => {
     await pool.end(); // Close connection
   }
 };
+exports.seed = function (knex) {
+  return knex("users").del().then(() => {
+    return knex("users").insert([
+      { id: knex.raw("uuid_generate_v4()"), name: "Admin", email: "admin@example.com", password: "hashed_password" },
+    ]);
+  });
+};
+
 
 // Run seeding script
 seedDatabase();

@@ -12,3 +12,5 @@ exports.up = function (knex) {
     return knex.schema.dropTable("users");
   };
   
+// This migration creates a "users" table with the following columns:
+// - id: A unique identifier for each user, generated as a UUID.
