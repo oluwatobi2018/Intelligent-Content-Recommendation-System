@@ -1,0 +1,148 @@
+openapi: 3.0.0
+info:
+  title: SaaS Intelligent Content Recommendation API
+  description: API documentation for the intelligent content recommendation platform
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@example.com
+
+servers:
+  - url: http://localhost:5000/api
+    description: Local development server
+  - url: https://your-production-url.com/api
+    description: Production server
+
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      description: Creates a new user account
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: John Doe
+                email:
+                  type: string
+                  format: email
+                  example: johndoe@example.com
+                password:
+                  type: string
+                  example: StrongPassword123!
+      responses:
+        "201":
+          description: User registered successfully
+        "400":
+          description: Validation error
+
+  /auth/login:
+    post:
+      summary: Login a user
+      description: Authenticates a user and returns a JWT token
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: johndoe@example.com
+                password:
+                  type: string
+                  example: StrongPassword123!
+      responses:
+        "200":
+          description: Successful login
+        "401":
+          description: Invalid credentials
+
+  /content:
+    get:
+      summary: Get all content items
+      description: Retrieves a list of all content
+      tags:
+        - Content Management
+      responses:
+        "200":
+          description: List of content items
+    post:
+      summary: Create a new content item
+      description: Adds a new content item (text, image, link, etc.)
+      tags:
+        - Content Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "How to Learn AI"
+                type:
+                  type: string
+                  enum: [text, image, link]
+                  example: "text"
+                content:
+                  type: string
+                  example: "AI is transforming industries..."
+      responses:
+        "201":
+          description: Content created successfully
+        "400":
+          description: Validation error
+
+  /recommendations:
+    get:
+      summary: Get personalized content recommendations
+      description: Returns AI-driven content recommendations based on user behavior
+      tags:
+        - AI Recommendations
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+            example: "60c72b2f9b1d8c3f28a9b21e"
+      responses:
+        "200":
+          description: List of recommended content items
+        "400":
+          description: User ID is required
+
+  /analytics:
+    get:
+      summary: Get content performance analytics
+      description: Retrieves insights on content engagement and performance
+      tags:
+        - Analytics
+      responses:
+        "200":
+          description: Content analytics data
+        "401":
+          description: Unauthorized
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth: []
