@@ -26,7 +26,7 @@ Endpoint: GET /users/{userId}/preferences
 Description: Fetches stored preferences of a user.
 
 Example Request:
-curl -X GET "https://api.example.com/users/123/preferences"
+curl -X GET "https://localhost:5000/users/123/preferences"
 
 Response:
 {
@@ -60,7 +60,7 @@ Example Request:
 bash
 Copy
 Edit
-curl -X GET "https://api.example.com/recommendations?userId=123"
+curl -X GET "https://localhost:5000/recommendations?userId=123"
 Response:
 
 json
@@ -100,7 +100,7 @@ Example Request:
 bash
 Copy
 Edit
-curl -X GET "https://api.example.com/search?query=AI"
+curl -X GET "https://localhost:5000/search?query=AI"
 Response:
 
 json
