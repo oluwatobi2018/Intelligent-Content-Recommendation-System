@@ -19,7 +19,7 @@ https://api.example.com
 (For local development: http://localhost:5000)
 
 # 🛠️ API Endpoints
-🔹 User Management
+# 🔹 User Management
 1. Get User Preferences
 Endpoint: GET /users/{userId}/preferences
 
@@ -114,7 +114,7 @@ Edit
   }
 ]
 # 🤖 AI Features
-🔹 Personalized Content Recommendations
+# 🔹 Personalized Content Recommendations
 Uses machine learning algorithms to analyze user preferences and suggest relevant content.
 
 Calculates similarity between a user’s interests and content tags using vector matching.
@@ -138,7 +138,7 @@ Provides relevant search results based on semantic analysis.
 
 Autocomplete & keyword-based filtering for better UX.
 
-🎯 Conclusion
+# 🎯 Conclusion
 This API + AI system offers a powerful recommendation engine, delivering a personalized experience for users. The AI-driven features analyze preferences, rank content, and adapt over time, ensuring users always get the most relevant and engaging content.
 ---
 
