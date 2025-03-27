@@ -51,21 +51,21 @@ Response:
 
 # 🔹 AI-Driven Recommendations
 3. Get Personalized Recommendations
-Endpoint: GET /recommendations?userId={userId}
+# Endpoint:
+GET /recommendations?userId={userId}
 
-Description: Fetches AI-powered content recommendations for a user based on their preferences and behavior.
+# Description: 
+Fetches AI-powered content recommendations for a user based on their preferences and behavior.
 
 Example Request:
 
 bash
 Copy
-Edit
 curl -X GET "https://localhost:5000/recommendations?userId=123"
 Response:
-
 json
 Copy
-Edit
+
 [
   {
     "title": "The Future of AI in Healthcare",
@@ -80,26 +80,29 @@ Edit
 ]
 # 🔹 Content & Utility Endpoints
 4. Fetch All Categories
-Endpoint: GET /categories
+# Endpoint:
+GET /categories
 
-Description: Returns a list of all content categories available.
+# Description: 
+Returns a list of all content categories available.
 
 Response:
-
 json
 Copy
-Edit
-["Tech", "Health", "Business", "Education"]
-5. Search Content
-Endpoint: GET /search?query={keyword}
 
-Description: Searches for content based on user input.
+["Tech", "Health", "Business", "Education"]
+
+5. Search Content
+# Endpoint:
+GET /search?query={keyword}
+
+# Description: 
+Searches for content based on user input.
 
 Example Request:
 
 bash
 Copy
-Edit
 curl -X GET "https://localhost:5000/search?query=AI"
 Response:
 
