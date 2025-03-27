@@ -1,37 +1,20 @@
-import Content from "../models/Content";
-import { ErrorResponse } from "../utils/errorHandler";
+import { fetchData } from "@/utils/api";
 
-class ContentService {
-  /**
-   * Fetches all content
-   */
-  static async getAllContent() {
-    return await Content.find().sort({ createdAt: -1 });
-  }
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.example.com";
 
-  /**
-   * Creates new content
-   */
-  static async createContent(contentData: { title: string; description: string; createdBy: string }) {
-    const { title, description, createdBy } = contentData;
-    if (!title || !description) {
-      throw new ErrorResponse("Title and description are required", 400);
-    }
+export const getAllContent = () => fetchData(`${API_BASE_URL}/content`);
 
-    return await Content.create({ title, description, createdBy });
-  }
+export const getContentById = (id: string) => fetchData(`${API_BASE_URL}/content/${id}`);
 
-  /**
-   * Deletes content by ID
-   */
-  static async deleteContent(contentId: string) {
-    const content = await Content.findById(contentId);
-    if (!content) {
-      throw new ErrorResponse("Content not found", 404);
-    }
+const makeRequest = (id: string, method: "POST" | "PUT" | "DELETE", data?: object) =>
+  fetchData(`${API_BASE_URL}/content${id ? `/${id}` : ""}`, {
+    method,
+    ...(data && { body: JSON.stringify(data) }),
+  });
 
-    await content.deleteOne();
-  }
-}
+export const createContent = (data: object) => makeRequest("", "POST", data);
 
-export default ContentService;
+export const updateContent = (id: string, data: object) => makeRequest(id, "PUT", data);
+
+export const deleteContent = (id: string) => makeRequest(id, "DELETE");
+

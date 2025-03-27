@@ -13,6 +13,8 @@ requiredEnv.forEach((key) => {
   }
 });
 
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.example.com";
+
 // Database connection configuration
 const pool = new Pool({
   user: process.env.DB_USER!,
