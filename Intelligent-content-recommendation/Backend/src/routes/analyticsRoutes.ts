@@ -1,9 +1,15 @@
 import express from "express";
 import AnalyticsController from "../controllers/analyticsController";
-import { authenticate } from "../middleware/authMiddleware";
+import { authenticateUser } from "../middleware/authMiddleware";
+import { requestLogger } from "../middleware/requestLogger";
 
 const router = express.Router();
 
-router.get("/", authenticate, AnalyticsController.getAnalytics);
+/**
+ * @route GET /analytics
+ * @desc Fetch user analytics (Protected Route)
+ * @access Private (Requires Authentication)
+ */
+router.get("/", authenticateUser, requestLogger, AnalyticsController.getAnalytics);
 
 export default router;

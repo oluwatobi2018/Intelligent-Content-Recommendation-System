@@ -1,0 +1,72 @@
+import os
+import pickle
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+# Define paths
+DATA_PATH = "../data/content_data.csv"  # Your dataset containing content info
+MODEL_DIR = os.path.join(os.path.dirname(__file__), "models")
+MODEL_FILE = os.path.join(MODEL_DIR, "model.pkl")
+
+# Ensure the models directory exists
+os.makedirs(MODEL_DIR, exist_ok=True)
+
+def load_data():
+    """
+    Load the content data from a CSV file.
+    The CSV file should have columns such as 'content_id', 'title', and 'description'.
+    """
+    try:
+        df = pd.read_csv(DATA_PATH)
+        print(f"Loaded {df.shape[0]} rows from {DATA_PATH}")
+        return df
+    except Exception as e:
+        raise Exception(f"Failed to load data: {e}")
+
+def train_model(df):
+    """
+    Train a recommendation model using TF-IDF and cosine similarity.
+    Combines the title and description fields to form a text corpus.
+    """
+    # Combine title and description into one text field
+    df["text"] = df["title"].fillna('') + " " + df["description"].fillna('')
+    
+    # Create a TF-IDF vectorizer and transform the text
+    vectorizer = TfidfVectorizer(stop_words="english")
+    tfidf_matrix = vectorizer.fit_transform(df["text"])
+    
+    # Compute the cosine similarity matrix
+    similarity_matrix = cosine_similarity(tfidf_matrix, tfidf_matrix)
+    
+    # Prepare the model as a dictionary
+    model = {
+        "vectorizer": vectorizer,
+        "similarity_matrix": similarity_matrix,
+        "content_ids": df["content_id"].tolist()
+    }
+    return model
+
+def save_model(model):
+    """
+    Serialize the trained model to a pickle file.
+    """
+    try:
+        with open(MODEL_FILE, "wb") as file:
+            pickle.dump(model, file)
+        print(f"Model saved successfully at {MODEL_FILE}")
+    except Exception as e:
+        raise Exception(f"Failed to save model: {e}")
+
+def main():
+    # Load the dataset
+    df = load_data()
+    
+    # Train the recommendation model
+    model = train_model(df)
+    
+    # Save the trained model to model.pkl
+    save_model(model)
+
+if __name__ == "__main__":
+    main()

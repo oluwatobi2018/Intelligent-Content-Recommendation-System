@@ -1,44 +1,66 @@
-import React, { createContext, useState, useEffect, ReactNode } from "react";
-import { getUserProfile, login, logout } from "@/service/authService";
+import React, { createContext, useState, useEffect, ReactNode, useCallback } from "react";
+import { fetchAnalyticsData } from "@/service/analyticsService";
 
-interface AuthContextProps {
-  user: any;
-  loginUser: (email: string, password: string) => Promise<void>;
-  logoutUser: () => void;
+interface AnalyticsData {
+  totalViews: number;
+  engagementRate: number;
+  activeUsers: number;
 }
 
-export const AuthContext = createContext<AuthContextProps | null>(null);
+interface AnalyticsContextProps {
+  analytics: AnalyticsData | null;
+  refreshAnalytics: () => Promise<void>;
+  loading: boolean;
+}
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<any>(null);
+export const AnalyticsContext = createContext<AnalyticsContextProps | null>(null);
+
+export const AnalyticsProvider = ({ children }: { children: ReactNode }) => {
+  const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchData = async () => {
+      setLoading(true);
       try {
-        const profile = await getUserProfile();
-        setUser(profile);
+        const storedData = localStorage.getItem("analytics");
+        if (storedData) {
+          setAnalytics(JSON.parse(storedData));
+        } else {
+          const data = await fetchAnalyticsData();
+          setAnalytics(data);
+          localStorage.setItem("analytics", JSON.stringify(data));
+        }
       } catch (error) {
-        console.error("User not authenticated");
+        console.error("Error fetching analytics data:", error);
+      } finally {
+        setLoading(false);
       }
     };
-    fetchUser();
+
+    fetchData();
+
+    // Auto-refresh analytics data every 5 minutes
+    const interval = setInterval(fetchData, 5 * 60 * 1000);
+    return () => clearInterval(interval);
   }, []);
 
-  const loginUser = async (email: string, password: string) => {
-    const response = await login(email, password);
-    if (response) {
-      setUser(response.user);
+  const refreshAnalytics = useCallback(async () => {
+    setLoading(true);
+    try {
+      const data = await fetchAnalyticsData();
+      setAnalytics(data);
+      localStorage.setItem("analytics", JSON.stringify(data));
+    } catch (error) {
+      console.error("Error refreshing analytics data:", error);
+    } finally {
+      setLoading(false);
     }
-  };
-
-  const logoutUser = () => {
-    logout();
-    setUser(null);
-  };
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loginUser, logoutUser }}>
+    <AnalyticsContext.Provider value={{ analytics, refreshAnalytics, loading }}>
       {children}
-    </AuthContext.Provider>
+    </AnalyticsContext.Provider>
   );
 };

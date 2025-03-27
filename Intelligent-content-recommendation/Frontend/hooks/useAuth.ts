@@ -1,25 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+
+interface User {
+  id: string;
+  name: string;
+}
 
 export function useAuth() {
-  const [user, setUser] = useState<{ id: string; name: string } | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    // Simulating authentication state check
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) setUser(JSON.parse(storedUser));
-    setLoading(false);
+    try {
+      const storedUser = sessionStorage.getItem("user"); // Consider sessionStorage for security
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    } catch (error) {
+      console.error("Failed to parse user data:", error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  const login = (userData: { id: string; name: string }) => {
+  const login = useCallback((userData: User) => {
     setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
-  };
+    sessionStorage.setItem("user", JSON.stringify(userData));
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setUser(null);
-    localStorage.removeItem("user");
-  };
+    sessionStorage.removeItem("user");
+  }, []);
 
   return { user, loading, login, logout };
 }
+

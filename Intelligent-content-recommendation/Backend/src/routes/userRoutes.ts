@@ -1,9 +1,16 @@
 import express from "express";
 import UserController from "../controllers/userController";
-import { authenticate } from "../middleware/authMiddleware";
+import { authenticateUser } from "../middleware/authMiddleware";
+import { validateRequest } from "../middleware/validateRequest";
 
 const router = express.Router();
 
-router.get("/profile", authenticate, UserController.getUserProfile);
+/**
+ * @route   GET /users/profile
+ * @desc    Retrieve authenticated user profile
+ * @access  Private (Requires Authentication)
+ */
+router.get("/profile", authenticateUser, validateRequest, UserController.getUserProfile);
 
 export default router;
+

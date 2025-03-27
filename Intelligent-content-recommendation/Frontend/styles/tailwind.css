@@ -1,3 +1,113 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ==== Global Styles ==== */
+body {
+  @apply bg-gray-100 text-gray-900 font-sans antialiased;
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold text-gray-800 leading-tight;
+}
+
+p {
+  @apply text-gray-700 leading-relaxed;
+}
+
+/* ==== Layout ==== */
+.container {
+  @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12;
+}
+
+/* ==== Buttons ==== */
+.btn {
+  @apply px-4 py-2 rounded-md font-medium transition duration-200;
+}
+
+.btn-primary {
+  @apply bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 focus:ring focus:ring-blue-300;
+}
+
+.btn-secondary {
+  @apply bg-gray-600 text-white hover:bg-gray-700 active:bg-gray-800 focus:ring focus:ring-gray-300;
+}
+
+.btn-outline {
+  @apply border border-gray-500 text-gray-600 hover:bg-gray-100 active:bg-gray-200 focus:ring focus:ring-gray-300;
+}
+
+.btn-danger {
+  @apply bg-red-600 text-white hover:bg-red-700 active:bg-red-800 focus:ring focus:ring-red-300;
+}
+
+/* ==== Cards ==== */
+.card {
+  @apply bg-white shadow-md rounded-lg p-5 hover:shadow-lg transition duration-300;
+}
+
+.card-header {
+  @apply font-semibold text-lg text-gray-900 mb-2;
+}
+
+.card-body {
+  @apply text-gray-700;
+}
+
+.card-footer {
+  @apply border-t mt-4 pt-4 text-sm text-gray-600;
+}
+
+/* ==== Forms & Inputs ==== */
+.input {
+  @apply w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition;
+}
+
+.input-error {
+  @apply border-red-500 focus:ring-red-500;
+}
+
+/* ==== Typography ==== */
+.text-muted {
+  @apply text-gray-500;
+}
+
+.text-accent {
+  @apply text-blue-600;
+}
+
+.text-error {
+  @apply text-red-600;
+}
+
+/* ==== Animations ==== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  @apply opacity-0 animate-[fadeIn_0.5s_ease-in-out_forwards];
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  @apply opacity-0 animate-[slideUp_0.6s_ease-in-out_forwards];
+}

@@ -15,22 +15,37 @@ jobs:
       run:
         working-directory: frontend
     strategy:
+      fail-fast: true
       matrix:
         node-version: [18.x]
     steps:
-      - name: Checkout Repository
+      - name: 🛎️ Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
-      - name: Install Dependencies
-        run: npm install
+      - name: 📦 Install Dependencies
+        run: npm ci
 
-      - name: Run Tests
-        run: npm test
+      - name: 🔍 Run Linter (ESLint)
+        run: npm run lint
 
-      - name: Build Application
+      - name: 🔎 Run TypeScript Type Check
+        run: npm run type-check
+
+      - name: 🧪 Run Tests with Coverage
+        run: npm test -- --coverage
+
+      - name: 📊 Upload Coverage Report to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./frontend/coverage/lcov.info
+          fail_ci_if_error: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: 🏗️ Build Application
         run: npm run build
