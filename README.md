@@ -54,44 +54,6 @@ This project is a SaaS-based intelligent content recommendation platform designe
 - **Terraform** for managing cloud infrastructure
 - **Prometheus & Grafana** for monitoring
 
-## Deployment Guide: Kubernetes, Terraform & CI/CD
-## 1. Overview
-This guide covers deploying the project using Kubernetes (K8s), Terraform for infrastructure-as-code (IaC), and CI/CD pipelines for automation.
-
-## 2. Infrastructure Provisioning with Terraform
-Terraform is used to create and manage the cloud resources required for your application.
-
-## 2.1. Create Terraform Configuration
-Inside a folder named infra/terraform, create main.tf:
-provider "aws" {
-  region = "us-east-1"
-}
-
-resource "aws_eks_cluster" "app_cluster" {
-  name     = "app-cluster"
-  role_arn = aws_iam_role.eks_role.arn
-
-  vpc_config {
-    subnet_ids = aws_subnet.app_subnet[*].id
-  }
-}
-
-resource "aws_iam_role" "eks_role" {
-  name = "eks-cluster-role"
-  # IAM role policies here
-}
-
-output "cluster_id" {
-  value = aws_eks_cluster.app_cluster.id
-}
-
-## 2.2. Initialize and Apply Terraform
-Run the following commands:
-cd infra/terraform
-terraform init
-terraform apply -auto-approve
-
-
 
 ## 🔑 Environment Variables (.env)
 ### **Backend (.env)**
