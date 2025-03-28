@@ -109,6 +109,222 @@ The API documentation is available at:
 ```sh
 http://localhost:5000/api-docs
 ```
+# API Documentation
+
+## Base URL
+```
+http://localhost:5000/api/v1
+```
+
+## Authentication
+
+### 1. User Registration
+**Endpoint:**
+```
+POST /auth/register
+```
+**Request Body:**
+```json
+{
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "password": "securepassword"
+}
+```
+**Response:**
+```json
+{
+  "message": "User registered successfully",
+  "token": "jwt_token_here"
+}
+```
+
+### 2. User Login
+**Endpoint:**
+```
+POST /auth/login
+```
+**Request Body:**
+```json
+{
+  "email": "johndoe@example.com",
+  "password": "securepassword"
+}
+```
+**Response:**
+```json
+{
+  "message": "Login successful",
+  "token": "jwt_token_here"
+}
+```
+
+## Content Management
+
+### 3. Create Content
+**Endpoint:**
+```
+POST /content
+```
+**Headers:**
+```
+Authorization: Bearer jwt_token_here
+```
+**Request Body:**
+```json
+{
+  "title": "AI in SaaS",
+  "body": "Exploring AI-powered recommendations.",
+  "tags": ["AI", "SaaS", "Tech"]
+}
+```
+**Response:**
+```json
+{
+  "message": "Content created successfully",
+  "contentId": "12345"
+}
+```
+
+### 4. Fetch All Content
+**Endpoint:**
+```
+GET /content
+```
+**Response:**
+```json
+[
+  {
+    "id": "12345",
+    "title": "AI in SaaS",
+    "body": "Exploring AI-powered recommendations.",
+    "tags": ["AI", "SaaS", "Tech"],
+    "createdAt": "2025-03-27T12:00:00Z"
+  }
+]
+```
+
+### 5. Update Content
+**Endpoint:**
+```
+PUT /content/{id}
+```
+**Headers:**
+```
+Authorization: Bearer jwt_token_here
+```
+**Request Body:**
+```json
+{
+  "title": "Updated AI in SaaS",
+  "body": "Updated content details.",
+  "tags": ["AI", "Machine Learning"]
+}
+```
+**Response:**
+```json
+{
+  "message": "Content updated successfully"
+}
+```
+
+### 6. Delete Content
+**Endpoint:**
+```
+DELETE /content/{id}
+```
+**Headers:**
+```
+Authorization: Bearer jwt_token_here
+```
+**Response:**
+```json
+{
+  "message": "Content deleted successfully"
+}
+```
+
+## User Behavior Tracking
+
+### 7. Track User Interaction
+**Endpoint:**
+```
+POST /user/interaction
+```
+**Request Body:**
+```json
+{
+  "userId": "67890",
+  "contentId": "12345",
+  "interactionType": "like"
+}
+```
+**Response:**
+```json
+{
+  "message": "Interaction recorded successfully"
+}
+```
+
+## AI Recommendation Engine
+
+### 8. Get Personalized Recommendations
+**Endpoint:**
+```
+GET /recommendations/{userId}
+```
+**Response:**
+```json
+{
+  "recommendations": [
+    {
+      "id": "67890",
+      "title": "AI and Future Trends",
+      "tags": ["AI", "Future"]
+    }
+  ]
+}
+```
+
+## Analytics
+
+### 9. Get Content Performance Analytics
+**Endpoint:**
+```
+GET /analytics/content
+```
+**Response:**
+```json
+{
+  "totalViews": 1000,
+  "topContent": [
+    {
+      "id": "12345",
+      "title": "AI in SaaS",
+      "views": 500
+    }
+  ]
+}
+```
+
+## Error Handling
+
+All error responses follow this format:
+```json
+{
+  "error": "Error message here"
+}
+```
+
+## Security Measures
+- JWT Authentication for secured endpoints.
+- Data validation and sanitization.
+- Rate limiting to prevent abuse.
+
+---
+This documentation provides a structured overview of the API endpoints, request/response examples, and authentication details. Let me know if you'd like additional refinements! 🚀
+
+
 
 ## 🛠️ Additional Enhancements
 - ✅ **Improved AI model accuracy** with user-based collaborative filtering
