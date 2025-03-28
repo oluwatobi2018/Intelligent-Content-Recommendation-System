@@ -1,4 +1,5 @@
 import express from "express";
+import { register } from "prom-client";
 import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
@@ -46,5 +47,15 @@ app.get("/api/health", (req, res) => {
 
 // 📌 Global error handler
 app.use(errorMiddleware);
+
+export default app;
+
+// 📌 Prometheus metrics endpoint
+const app = express();
+
+app.get("/metrics", async (req, res) => {
+  res.set("Content-Type", register.contentType);
+  res.end(await register.metrics());
+});
 
 export default app;
