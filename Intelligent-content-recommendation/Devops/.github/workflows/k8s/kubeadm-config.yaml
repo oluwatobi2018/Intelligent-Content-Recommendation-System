@@ -1,0 +1,22 @@
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: ClusterConfiguration
+kubernetesVersion: stable
+controlPlaneEndpoint: "LOAD_BALANCER_DNS:LOAD_BALANCER_PORT"
+networking:
+    podSubnet: "192.168.0.0/16"
+    serviceSubnet: "10.96.0.0/12"
+    dnsDomain: "cluster.local"
+apiServer:
+    extraArgs:
+        authorization-mode: "Node,RBAC"
+controllerManager:
+    extraArgs:
+        node-cidr-mask-size: "24"
+scheduler: {}
+etcd:
+    local:
+        dataDir: "/var/lib/etcd"
+---
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+kind: KubeProxyConfiguration
+mode: "ipvs"

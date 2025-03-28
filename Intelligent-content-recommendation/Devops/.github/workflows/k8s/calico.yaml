@@ -1,0 +1,31 @@
+
+# Calico Network Policy for Kubernetes
+# This configuration installs Calico for networking and network policy.
+
+apiVersion: operator.tigera.io/v1
+kind: Installation
+metadata:
+    name: default
+spec:
+    variant: Calico
+
+---
+
+apiVersion: operator.tigera.io/v1
+kind: TigeraStatus
+metadata:
+    name: calico
+spec: {}
+
+---
+
+# Calico Custom Resources for networking
+apiVersion: crd.projectcalico.org/v1
+kind: IPPool
+metadata:
+    name: default-ipv4-ippool
+spec:
+    cidr: 192.168.0.0/16
+    ipipMode: Always
+    natOutgoing: true
+    blockSize: 26
