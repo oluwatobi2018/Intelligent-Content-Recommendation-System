@@ -1,179 +1,219 @@
-# 📌 Intelligent Content Recommendation Platform
+# **Intelligent Content Recommendation Platform**
 
-## 🚀 Overview
+## **Overview**
+This project is a **SaaS-based intelligent content recommendation platform** that allows businesses to:
+- **Ingest Data**: Accept various content formats (text, images, links).
+- **Analyze User Behavior**: Track interactions and user preferences.
+- **Deliver Personalized Recommendations**: Use AI to provide tailored content.
+- **Manage Content**: Add, update, and delete content.
+- **Generate Insights**: Provide analytics on content performance and user engagement.
 
-This project is a **SaaS-based AI-powered content recommendation platform** that enables businesses to:
+## **Tech Stack**
+### **Frontend**
+- **Framework**: Next.js (React + TypeScript)
+- **Styling**: TailwindCSS
+- **State Management**: Redux Toolkit / React Context API
+- **API Handling**: Axios / Fetch API
+- **Authentication**: JWT-based auth
 
-- **Ingest Data**: Accept and manage various content formats (text, images, links).
-- **Analyze User Behavior**: Track interactions and preferences.
-- **Deliver Personalized Recommendations**: Leverage AI/ML to suggest tailored content.
-- **Manage Content**: CRUD operations for content.
-- **Generate Insights**: Analyze content performance and user engagement.
+### **Backend**
+- **Framework**: Node.js with Express (TypeScript)
+- **Database**: PostgreSQL (Knex.js) / MongoDB
+- **Authentication**: JWT & OAuth
+- **Caching**: Redis
+- **Logging**: Winston
+- **Monitoring**: Prometheus & Grafana
 
-## 🏗 Tech Stack
+### **AI Recommendation Engine**
+- **Tech**: TensorFlow.js / Python (Scikit-learn, TensorFlow)
+- **Models**: Collaborative Filtering, Content-Based, Hybrid
 
-### Frontend
+### **DevOps**
+- **Containerization**: Docker & Kubernetes
+- **CI/CD**: GitHub Actions / Jenkins
+- **Deployment**: AWS / Vercel / Render
 
-- **Framework**: Next.js (React with TypeScript, TailwindCSS)
-- **State Management**: Redux Toolkit
-- **UI Components**: ShadCN/UI, Recharts
-- **Authentication**: NextAuth (JWT-based authentication)
+## **Features**
+### **1. Frontend**
+✅ User authentication & profile management  
+✅ Content browsing with intelligent recommendations  
+✅ Dashboard for analytics & user engagement tracking  
+✅ Mobile-responsive design
 
-### Backend
+### **2. Backend**
+✅ RESTful APIs for content management & recommendation retrieval  
+✅ User authentication & role-based access control (RBAC)  
+✅ Scalable database design with indexing & optimization  
+✅ Error handling & logging with Winston  
+✅ Prometheus metrics for performance monitoring  
 
-- **Server**: Node.js (Express + TypeScript)
-- **Database**: PostgreSQL (Knex.js ORM) / MongoDB (Mongoose)
-- **Authentication**: JWT-based authentication
-- **AI Engine**: TensorFlow\.js / Python (for ML models)
-- **Logging & Monitoring**: Winston, Morgan
+### **3. AI Recommendation Engine**
+✅ User behavior tracking (clicks, likes, views)  
+✅ Real-time recommendations using AI models  
+✅ Model training & evaluation pipeline  
 
-### DevOps & Deployment
+### **4. DevOps & CI/CD**
+✅ Dockerized services with `Dockerfile` and `.dockerignore`  
+✅ Kubernetes configuration with `k8s/deployments.yaml` & `k8s/services.yaml`  
+✅ Automated testing & deployment with GitHub Actions  
+✅ Monitoring with Prometheus & Grafana  
 
-- **Containerization**: Docker & Docker Compose
-- **CI/CD**: GitHub Actions
-- **Cloud Services**: AWS, Vercel (Frontend), Render (Backend)
-- **Orchestration**: Kubernetes (K8s)
-- **Infrastructure as Code**: Terraform (optional)
-
-
-
-## 🔥 Features
-
-### ✅ Frontend
-
-- 📄 Content listing with filtering & searching
-- 📊 Dashboard with user behavior analytics
-- 🤖 AI-powered recommendations display
-- 🔐 Secure authentication (JWT, OAuth via NextAuth)
-
-### ✅ Backend
-
-- 🔧 RESTful API for content management, recommendations & user tracking
-- 🔐 Authentication & Authorization (JWT-based)
-- 📊 Real-time tracking of user engagement
-- 📂 AI-powered recommendation engine
-- 📜 Swagger documentation
-
-### ✅ AI Engine
-
-- 📌 Collaborative Filtering, Content-Based Filtering, or Hybrid models
-- 🤖 Real-time content recommendation API
-- 🎯 Model training on user behavior data
-
-## 📡 API Endpoints (Swagger Docs)
-
-- Base URL: `http://localhost:5000/api`
-- 📌 View API Docs: [Swagger UI](http://localhost:5000/api/docs)
-
-### 🚀 Authentication
-
-| METHOD | ENDPOINT     | DESCRIPTION       |
-| ------ | ------------ | ----------------- |
-| POST   | /auth/signup | User registration |
-| POST   | /auth/login  | User login        |
-
-### 📌 Content Management
-
-| METHOD | ENDPOINT      | DESCRIPTION     |
-| ------ | ------------- | --------------- |
-| GET    | /content      | Get all content |
-| POST   | /content      | Add new content |
-| PUT    | /content/\:id | Update content  |
-| DELETE | /content/\:id | Delete content  |
-
-### 🔥 AI Recommendation
-
-| METHOD | ENDPOINT         | DESCRIPTION                |
-| ------ | ---------------- | -------------------------- |
-| GET    | /recommendations | Get AI-powered suggestions |
-
-## 🔧 Setup & Installation
-
-### 1️⃣ Clone the Repository
-
-```sh
-git clone https://github.com/yourusername/content-recommendation.git
-cd content-recommendation
+## **Installation**
+### **1. Clone the Repository**
+```bash
+git clone https://github.com/your-repo/intelligent-recommendation-platform.git
+cd intelligent-recommendation-platform
 ```
 
-### 2️⃣ Install Dependencies
+### **2. Set Up Environment Variables**
+Create a `.env` file in the backend and frontend folders.
+#### **Backend `.env`**
+```plaintext
+PORT=5000
+DATABASE_URL=postgres://user:password@localhost:5432/database
+JWT_SECRET=your_secret_key
+REDIS_URL=redis://localhost:6379
+```
 
+#### **Frontend `.env.local`**
+```plaintext
+NEXT_PUBLIC_API_URL=http://localhost:5000
+NEXT_PUBLIC_RECOMMENDATION_API=http://localhost:5000/recommendations
+```
+
+### **3. Install Dependencies**
 #### **Backend**
-
-```sh
+```bash
 cd backend
 npm install
 ```
-
 #### **Frontend**
-
-```sh
+```bash
 cd frontend
 npm install
 ```
 
-### 3️⃣ Configure Environment Variables
-
-Copy `.env.example` to `.env` and fill in the necessary variables.
-
-#### Example `.env` (Backend)
-
-```
-PORT=5000
-DATABASE_URL=postgres://user:password@localhost:5432/recommendation_db
-JWT_SECRET=your_jwt_secret
-```
-
-### 4️⃣ Run Migrations & Seed Database
-
-```sh
-npx knex migrate:latest
-npx knex seed:run
-```
-
-### 5️⃣ Start Development Server
-
+### **4. Run the Application**
 #### **Backend**
-
-```sh
+```bash
+cd backend
 npm run dev
 ```
-
 #### **Frontend**
-
-```sh
+```bash
+cd frontend
 npm run dev
 ```
 
-### 6️⃣ Run with Docker (Optional)
+### **5. Run Database Migrations & Seed Data**
+```bash
+cd backend
+npm run knex migrate:latest
+npm run knex seed:run
+```
 
-```sh
+## **API Documentation**
+### **Swagger Docs**
+After running the backend, API documentation is available at:
+```
+http://localhost:5000/api/docs
+```
+
+### **Example API Calls**
+#### **1. User Registration**
+```http
+POST /api/auth/register
+```
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "securepassword"
+}
+```
+
+#### **2. Get Personalized Recommendations**
+```http
+GET /api/recommendations?userId=uuid123
+```
+
+## **Deployment**
+### **Docker Setup**
+#### **Build & Run Containers**
+```bash
 docker-compose up --build
 ```
+#### **Stop Containers**
+```bash
+docker-compose down
+```
 
-## 🛠 Deployment
+### **Kubernetes Setup**
+#### **Apply Deployments**
+```bash
+kubectl apply -f k8s/
+```
+#### **Check Status**
+```bash
+kubectl get pods
+```
 
-### **CI/CD with GitHub Actions**
+## **Monitoring & Logging**
+### **1. View Logs (Backend)**
+```bash
+tail -f logs/app.log
+```
+### **2. Access Prometheus Metrics**
+```
+http://localhost:9090
+```
+### **3. Access Grafana Dashboards**
+```
+http://localhost:3000
+```
+(Default Login: admin/admin)
 
-- Lint & Test Code ✅
-- Build & Push Docker Images ✅
-- Deploy to Cloud (AWS/Vercel) ✅
+## **Project Structure**
+```
+📂 intelligent-recommendation-platform
+ ├── 📂 backend
+ │   ├── 📂 src
+ │   │   ├── 📂 controllers
+ │   │   ├── 📂 models
+ │   │   ├── 📂 routes
+ │   │   ├── 📂 services
+ │   │   ├── 📂 middleware
+ │   │   ├── 📂 config
+ │   │   ├── 📂 docs (Swagger API docs)
+ │   │   ├── 📂 tests
+ │   ├── 📄 server.js
+ │   ├── 📄 package.json
+ │   ├── 📄 knexfile.js (Database config)
+ │   ├── 📂 database
+ │   │   ├── 📂 migrations
+ │   │   ├── 📂 seeds
+ ├── 📂 frontend
+ │   ├── 📂 components
+ │   ├── 📂 pages
+ │   ├── 📂 styles
+ │   ├── 📄 next.config.js
+ │   ├── 📄 package.json
+ ├── 📂 k8s (Kubernetes configs)
+ ├── 📂 logs (Application logs)
+ ├── 📄 docker-compose.yml
+ ├── 📄 README.md
+```
 
-## 🚀 Contribution Guidelines
+## **Contributing**
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make changes and commit (`git commit -m "Added new feature"`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Open a Pull Request.
 
-- Fork the repository
-- Create a new branch (`git checkout -b feature-branch`)
-- Commit your changes (`git commit -m "Added new feature"`)
-- Push to the branch (`git push origin feature-branch`)
-- Open a Pull Request
-
-## 📜 License
-
-This project is licensed under the **MIT License**.
+## **License**
+This project is licensed under the MIT License.
 
 ---
-
-### 💡 Looking for Contributors!
-
-If you're interested in AI-powered recommendations, feel free to contribute. 🙌
+🚀 **Happy Coding!** 😊
 
