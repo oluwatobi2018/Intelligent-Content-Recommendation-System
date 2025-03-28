@@ -118,7 +118,7 @@ http://localhost:5000/api-docs
 - ✅ **Cloud-enabled with Terraform & Kubernetes** for scalability
 
 ---
-📌 **Maintained by:** Your Name
+📌 **Maintained by:** Oluwatobi Adeogun
 📌 **License:** MIT License
 📌 **Contributors Welcome!** Feel free to open a PR!
 
