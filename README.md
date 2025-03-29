@@ -46,6 +46,85 @@ This project is a SaaS-based intelligent content recommendation platform designe
 - **Content Table:** Holds articles, images, links & metadata
 - **Engagement Table:** Tracks user interactions for ML training
 - **Logs Table:** Maintains event logs for monitoring
+# Database Schema Documentation
+
+## 🏛️ Entity-Relationship Diagram (ERD)
+
+Below is an overview of the database schema:
+
+```plaintext
++-------------------+       +------------------+       +--------------------+
+|      Users       |       |    Content       |       |  User_Engagement   |
++-------------------+       +------------------+       +--------------------+
+| id (UUID)        |-----> | id (UUID)        |       | id (UUID)          |
+| name (STRING)    |       | title (STRING)   |<----- | user_id (UUID)     |
+| email (STRING)   |       | type (ENUM)      |       | content_id (UUID)  |
+| password (HASH)  |       | metadata (JSON)  |       | interaction (ENUM) |
++-------------------+       +------------------+       +--------------------+
+```
+
+## 📖 Schema Explanation
+
+### **Users Table**
+Stores user information and authentication details.
+
+| Column     | Type    | Description |
+|------------|---------|-------------|
+| `id`       | UUID    | Unique identifier for the user |
+| `name`     | STRING  | Full name of the user |
+| `email`    | STRING  | Unique email address |
+| `password` | HASH    | Securely hashed password |
+
+### **Content Table**
+Stores information about different types of content.
+
+| Column    | Type    | Description |
+|-----------|--------|-------------|
+| `id`      | UUID   | Unique identifier for content |
+| `title`   | STRING | Title of the content |
+| `type`    | ENUM   | Content type (e.g., `article`, `video`, `image`) |
+| `metadata`| JSON   | Additional content details |
+
+### **User_Engagement Table**
+Tracks user interactions with content for AI recommendations.
+
+| Column       | Type    | Description |
+|-------------|--------|-------------|
+| `id`        | UUID   | Unique identifier for engagement |
+| `user_id`   | UUID   | User who interacted with content |
+| `content_id`| UUID   | Content that was interacted with |
+| `interaction` | ENUM  | Type of interaction (`click`, `like`, `share`, `view`) |
+
+## 🛠️ Migrations & Seeding
+
+To set up the database schema, run the following commands:
+
+```bash
+# Run migrations to create tables
+npx knex migrate:latest
+
+# Seed initial data
+npx knex seed:run
+```
+
+## 🔍 Query Examples
+
+Fetch all users:
+```sql
+SELECT * FROM users;
+```
+
+Fetch user interactions with content:
+```sql
+SELECT users.name, content.title, user_engagement.interaction 
+FROM user_engagement 
+JOIN users ON users.id = user_engagement.user_id 
+JOIN content ON content.id = user_engagement.content_id;
+```
+
+This section provides a clear structure and explanation for your database design.
+
+
 
 ## 🏗️ Deployment & CI/CD
 - Uses **Docker** for containerization
