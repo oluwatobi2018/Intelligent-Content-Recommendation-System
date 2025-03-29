@@ -53,6 +53,270 @@ This project is a SaaS-based intelligent content recommendation platform designe
 - **Kubernetes (K8s)** for scaling services
 - **Terraform** for managing cloud infrastructure
 - **Prometheus & Grafana** for monitoring
+# **Deployment Guide: Kubernetes, Terraform, and Deployment Scripts**
+
+This guide covers how to **deploy** the SaaS-based content recommendation platform using **Kubernetes (K8s), Terraform (IaC), and CI/CD pipelines** for seamless deployment.
+
+---
+
+## **1. Prerequisites**  
+Ensure you have the following installed:  
+✅ **Docker** (For containerization)  
+✅ **Kubernetes CLI (kubectl)**  
+✅ **Helm** (For managing K8s deployments)  
+✅ **Terraform** (For infrastructure management)  
+✅ **A cloud provider account** (AWS, GCP, or Azure)  
+✅ **GitHub Actions/GitLab CI/CD** (For automation)  
+
+---
+
+## **2. Docker Setup**  
+First, **containerize** the application.  
+
+### **Step 1: Build Docker Images**  
+Navigate to the **backend** and **frontend** directories:  
+
+```bash
+# Build Backend Docker Image
+cd backend
+docker build -t my-backend:latest .
+
+# Build Frontend Docker Image
+cd ../frontend
+docker build -t my-frontend:latest .
+```
+
+### **Step 2: Run Containers Locally**  
+```bash
+docker run -p 5000:5000 my-backend
+docker run -p 3000:3000 my-frontend
+```
+
+### **Step 3: Push to Docker Hub / Private Registry**  
+```bash
+# Authenticate with Docker
+docker login -u <username> -p <password>
+
+# Tag and Push Backend
+docker tag my-backend <dockerhub_username>/my-backend:v1
+docker push <dockerhub_username>/my-backend:v1
+
+# Tag and Push Frontend
+docker tag my-frontend <dockerhub_username>/my-frontend:v1
+docker push <dockerhub_username>/my-frontend:v1
+```
+
+---
+
+## **3. Kubernetes (K8s) Deployment**  
+We will deploy the **backend**, **frontend**, and **database** to **Kubernetes**.
+
+### **Step 1: Setup Kubernetes Cluster**  
+If using **Minikube**, start the cluster:  
+```bash
+minikube start
+```
+For **AWS EKS, GCP GKE, or Azure AKS**, create a cluster using the cloud console or CLI.
+
+### **Step 2: Apply K8s Configurations**  
+In the **k8s/** directory, create the necessary YAML files:  
+
+📌 **frontend-deployment.yaml**
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: <dockerhub_username>/my-frontend:v1
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
+```
+
+📌 **backend-deployment.yaml**
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: <dockerhub_username>/my-backend:v1
+        env:
+        - name: DATABASE_URL
+          value: "postgres://user:password@db-service:5432/db_name"
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP
+```
+
+### **Step 3: Deploy to Kubernetes**  
+Apply the configurations:  
+```bash
+kubectl apply -f k8s/
+```
+
+Verify deployments:  
+```bash
+kubectl get pods
+kubectl get services
+```
+
+---
+
+## **4. Infrastructure as Code with Terraform**  
+Use **Terraform** to manage cloud resources like databases, Kubernetes clusters, and storage.
+
+📌 **terraform/main.tf**
+```hcl
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_eks_cluster" "my_cluster" {
+  name     = "my-k8s-cluster"
+  role_arn = aws_iam_role.eks_role.arn
+  vpc_config {
+    subnet_ids = aws_subnet.public[*].id
+  }
+}
+
+resource "aws_rds_instance" "postgres" {
+  identifier            = "mydb-instance"
+  engine               = "postgres"
+  instance_class       = "db.t3.micro"
+  allocated_storage    = 20
+  username            = "admin"
+  password            = "password"
+  publicly_accessible = false
+}
+```
+
+### **Deploy using Terraform**  
+```bash
+terraform init
+terraform apply -auto-approve
+```
+
+---
+
+## **5. CI/CD with GitHub Actions**  
+📌 **.github/workflows/deploy.yml**
+```yaml
+name: Deploy to Kubernetes
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Kubernetes
+        uses: azure/setup-kubectl@v3
+
+      - name: Deploy to K8s
+        run: |
+          kubectl apply -f k8s/
+          kubectl rollout status deployment/backend
+          kubectl rollout status deployment/frontend
+```
+
+Push changes to **GitHub**, and the workflow will **auto-deploy** the application.
+
+---
+
+## **6. Monitoring & Scaling**  
+For **logging & monitoring**, use **Prometheus and Grafana**.
+
+📌 **Install Prometheus on Kubernetes**  
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm install prometheus prometheus-community/prometheus
+```
+
+📌 **Install Grafana**  
+```bash
+helm install grafana grafana/grafana
+```
+
+Check running services:  
+```bash
+kubectl get pods -n monitoring
+kubectl get svc -n monitoring
+```
+
+---
+
+## **7. Accessing the Application**  
+Find the **LoadBalancer IP**:  
+```bash
+kubectl get svc frontend-service
+```
+Visit:  
+```
+http://<LOADBALANCER_IP>
+```
+
+---
+
+## **Conclusion**  
+✅ **Dockerized the app**  
+✅ **Deployed to Kubernetes**  
+✅ **Used Terraform for cloud resources**  
+✅ **Set up CI/CD for automation**  
+✅ **Integrated monitoring with Prometheus & Grafana**  
+
+🚀 **The application is now fully deployed!** 🚀
 
 
 ## 🔑 Environment Variables (.env)
