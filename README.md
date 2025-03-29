@@ -318,7 +318,8 @@ The AI system consists of the following key components:
 ## A. Data Collection & Preprocessing
 User Data: Tracks user interactions, clicks, likes, and engagement metrics.
 
-## Content Data: Stores metadata such as categories, keywords, timestamps, and user-generated tags.
+## Content Data: 
+Stores metadata such as categories, keywords, timestamps, and user-generated tags.
 
 ## Behavioral Data: Analyzes browsing history, session duration, and user preferences.
 
