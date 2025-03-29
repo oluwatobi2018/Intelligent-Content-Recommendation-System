@@ -308,6 +308,89 @@ GET /analytics/content
 }
 ```
 
+## AI Model Architecture and Training Process
+## 1. Overview
+The AI recommendation engine is designed to provide personalized content recommendations by analyzing user interactions, content metadata, and behavioral patterns. It employs a hybrid recommendation approach that combines collaborative filtering and content-based filtering for enhanced accuracy.
+
+## 2. Model Architecture
+The AI system consists of the following key components:
+
+## A. Data Collection & Preprocessing
+User Data: Tracks user interactions, clicks, likes, and engagement metrics.
+
+## Content Data: Stores metadata such as categories, keywords, timestamps, and user-generated tags.
+
+## Behavioral Data: Analyzes browsing history, session duration, and user preferences.
+
+Data is preprocessed using:
+
+Normalization (scaling features)
+
+Tokenization & Embeddings (for text-based content)
+
+Missing Data Handling (imputation strategies)
+
+## B. Recommendation Algorithms
+The system employs a hybrid model combining:
+
+Collaborative Filtering (CF)
+
+Uses Matrix Factorization (Singular Value Decomposition - SVD) for user-item interaction matrix.
+
+Example: If User A and User B have similar interaction patterns, recommend items liked by User B to User A.
+
+Content-Based Filtering
+
+Uses TF-IDF (Term Frequency-Inverse Document Frequency) and Word2Vec embeddings for text similarity.
+
+Computes cosine similarity between content features to recommend similar items.
+
+Hybrid Recommendation Model
+
+Weighted Approach: Combines scores from both CF and Content-Based Filtering.
+
+Ensemble Learning: Uses a meta-learning model (e.g., a Neural Network) to blend multiple recommendation signals.
+
+## 3. Model Training & Optimization
+Training Dataset: Uses real-world user engagement data (e.g., past interactions, ratings, browsing history).
+
+Training Process:
+
+Splits dataset into training (80%) and testing (20%).
+
+Uses Mini-batch Stochastic Gradient Descent (SGD) for optimization.
+
+Applies Regularization (L2) to prevent overfitting.
+
+Performs Hyperparameter Tuning (learning rate, batch size, embedding dimensions).
+
+Evaluation Metrics:
+
+Precision@K (accuracy of top-K recommendations)
+
+Recall@K (coverage of relevant items in recommendations)
+
+Mean Squared Error (MSE) for rating predictions
+
+Normalized Discounted Cumulative Gain (NDCG) for ranking relevance
+
+## 4. Deployment
+Batch Inference: Periodic re-training and updating recommendation scores in a Redis cache.
+
+Real-Time API: Fast predictions using a Flask/FastAPI microservice.
+
+Scalability:
+
+Uses Redis caching for fast retrieval.
+
+Deployed on Kubernetes with auto-scaling.
+
+## 5. Future Improvements
+Deep Learning-based models: Implement Transformer-based BERT4Rec for sequential recommendations.
+
+Graph-Based Models: Utilize Graph Neural Networks (GNNs) for advanced user-content relationships.
+
+A/B Testing: Continuously test new models in production to optimize engagement.
 ## Error Handling
 
 All error responses follow this format:
