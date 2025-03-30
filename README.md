@@ -749,6 +749,34 @@ All error responses follow this format:
 - Data validation and sanitization.
 - Rate limiting to prevent abuse.
 
+## Testing Coverage
+We use **Jest** and **Supertest** for testing.
+
+### Running Tests
+```sh
+# Run all tests
+npm test
+
+# Run unit tests only
+npm run test:unit
+
+# Run integration tests
+npm run test:integration
+```
+
+### Testing Features
+- **Unit Tests**: Ensure individual components work as expected.
+- **Integration Tests**: Validate interactions between services.
+- **Mocking & Stubbing**: Simulate external dependencies for reliable tests.
+
+## Copying This Documentation
+Click the **copy** button above to quickly copy this documentation into your environment.
+
+---
+Let me know if you need additional modifications! 🚀
+
+
+
 ---
 This documentation provides a structured overview of the API endpoints, request/response examples, and authentication details. 
 
