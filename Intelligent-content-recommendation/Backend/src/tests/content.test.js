@@ -19,9 +19,12 @@ describe('Content Recommendation API', () => {
         expect(response.body).toHaveProperty('error');
     });
 
-    it('should return 404 for an invalid endpoint', async () => {
-        const response = await request(app).get('/api/invalid-endpoint');
+    it('should return 404 if no recommendations are found', async () => {
+        const response = await request(app)
+            .get('/api/recommendations')
+            .query({ userId: 'nonexistent' });
 
         expect(response.status).toBe(404);
+        expect(response.body).toHaveProperty('error');
     });
 });
