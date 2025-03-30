@@ -769,14 +769,6 @@ npm run test:integration
 - **Integration Tests**: Validate interactions between services.
 - **Mocking & Stubbing**: Simulate external dependencies for reliable tests.
 
-## Copying This Documentation
-Click the **copy** button above to quickly copy this documentation into your environment.
-
----
-Let me know if you need additional modifications! 🚀
-
-
-
 ---
 This documentation provides a structured overview of the API endpoints, request/response examples, and authentication details. 
 
