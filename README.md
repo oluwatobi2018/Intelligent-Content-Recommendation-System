@@ -769,6 +769,144 @@ npm run test:integration
 - **Integration Tests**: Validate interactions between services.
 - **Mocking & Stubbing**: Simulate external dependencies for reliable tests.
 
+  # Advanced Logging & Monitoring
+
+## Overview
+To ensure system reliability, track performance, and detect anomalies, we integrate advanced logging and monitoring using **Winston** for logging and **Prometheus & Grafana** for monitoring.
+
+---
+
+## 1. Logging with Winston
+
+### Install Winston
+```sh
+npm install winston
+```
+
+### Create a Logger Utility
+**File:** `backend/src/utils/logger.js`
+```js
+import winston from "winston";
+
+const logger = winston.createLogger({
+  level: "info",
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.printf(({ timestamp, level, message }) => {
+      return `${timestamp} [${level.toUpperCase()}]: ${message}`;
+    })
+  ),
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: "logs/error.log", level: "error" }),
+    new winston.transports.File({ filename: "logs/combined.log" })
+  ]
+});
+
+export default logger;
+```
+
+### Implement Logger in API
+Modify **middleware/requestLogger.js**:
+```js
+import logger from "../utils/logger";
+
+export const requestLogger = (req, res, next) => {
+  logger.info(`Incoming Request: ${req.method} ${req.url}`);
+  next();
+};
+```
+
+Use in `backend/src/routes/index.js`:
+```js
+import { requestLogger } from "../middleware/requestLogger";
+router.use(requestLogger);
+```
+
+---
+
+## 2. Monitoring with Prometheus & Grafana
+
+### Install Prometheus Client
+```sh
+npm install prom-client
+```
+
+### Create a Metrics Middleware
+**File:** `backend/src/middleware/metrics.js`
+```js
+import client from "prom-client";
+import express from "express";
+
+const collectDefaultMetrics = client.collectDefaultMetrics;
+collectDefaultMetrics();
+
+const metricsRouter = express.Router();
+
+metricsRouter.get("/metrics", async (req, res) => {
+  res.set("Content-Type", client.register.contentType);
+  res.end(await client.register.metrics());
+});
+
+export default metricsRouter;
+```
+
+Use in `backend/src/app.js`:
+```js
+import metricsRouter from "./middleware/metrics";
+app.use("/monitoring", metricsRouter);
+```
+
+---
+
+## 3. Setting Up Grafana & Prometheus
+
+### Step 1: Create Prometheus Configuration
+**File:** `prometheus.yml`
+```yaml
+scrape_configs:
+  - job_name: 'node_app'
+    static_configs:
+      - targets: ['localhost:5000']
+```
+
+### Step 2: Run Prometheus & Grafana with Docker
+**File:** `docker-compose.yml`
+```yaml
+version: '3.8'
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+```
+
+### Step 3: Start the Services
+```sh
+docker-compose up -d
+```
+
+### Step 4: Access the Monitoring Tools
+- **Prometheus:** `http://localhost:9090`
+- **Grafana:** `http://localhost:3000`
+
+---
+
+## 4. Visualizing Metrics in Grafana
+1. Log in to **Grafana** (`admin/admin` by default).
+2. Add **Prometheus** as a data source (`http://prometheus:9090`).
+3. Create a **dashboard** and add visualizations for request count, error rates, and response times.
 ---
 This documentation provides a structured overview of the API endpoints, request/response examples, and authentication details. 
 
