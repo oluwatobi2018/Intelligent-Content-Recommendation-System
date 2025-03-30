@@ -12,14 +12,17 @@ yarn-error.log
 
 # Environment variables (avoid exposing secrets)
 .env*
-!env.example  # Allow example env file for reference
+!.env.example  # Allow example env file for reference
 
-# Build artifacts (reduces unnecessary files)
+# Build artifacts & caches
 dist/
 build/
 .cache/
-.next/  # Next.js build output
-out/    # Next.js static export
+.next/         # Next.js build output
+out/           # Next.js static export
+coverage/      # Jest/Testing coverage reports
+*.tsbuildinfo  # TypeScript build info
+.eslintcache   # ESLint cache
 
 # Docker-related (ignore overrides & local compose files)
 docker-compose.override.yml
