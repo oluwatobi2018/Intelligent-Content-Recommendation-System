@@ -1,0 +1,58 @@
+{
+    "info": {
+        "name": "Intelligent Content Recommendation API",
+        "_postman_id": "12345678-abcd-efgh-ijkl-1234567890ab",
+        "description": "Postman collection for the Intelligent Content Recommendation API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Get Recommendations",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/recommendations",
+                    "host": ["{{base_url}}"],
+                    "path": ["recommendations"],
+                    "query": [
+                        {
+                            "key": "userId",
+                            "value": "12345",
+                            "description": "ID of the user to get recommendations for"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Add Content",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"title\": \"Sample Content\",\n  \"description\": \"This is a sample content description\",\n  \"tags\": [\"tag1\", \"tag2\"]\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/content",
+                    "host": ["{{base_url}}"],
+                    "path": ["content"]
+                }
+            },
+            "response": []
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:3000/api"
+        }
+    ]
+}

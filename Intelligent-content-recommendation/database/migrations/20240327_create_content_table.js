@@ -12,4 +12,13 @@ exports.up = function (knex) {
   exports.down = function (knex) {
     return knex.schema.dropTable("content");
   };
+
+  // This migration creates a "content" table with the following columns:
+// - id: A unique identifier for each content item, generated as a UUID.
+// - title: The title of the content item, which cannot be null.
+// - type: The type of content (text, image, link), which cannot be null.
+// - content: The actual content of the item, which cannot be null.
+// - user_id: A foreign key referencing the users table, indicating which user created the content item.
+
+
   
