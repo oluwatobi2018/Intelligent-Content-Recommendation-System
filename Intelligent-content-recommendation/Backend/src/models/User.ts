@@ -1,57 +1,63 @@
-import mongoose, { Document, Schema } from "mongoose";
+import { DataTypes, Model } from "sequelize";
 import bcrypt from "bcrypt";
 
-/**
- * Interface for TypeScript Type Safety
- */
-interface IUser extends Document {
-  name: string;
-  email: string;
-  password: string;
-  role: "user" | "admin";
-  preferences: string[];
-  isActive: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  comparePassword(candidatePassword: string): Promise<boolean>;
-}
+export default (sequelize) => {
+  class User extends Model {
+    // 🔹 Compare password for authentication
+    async validatePassword(password) {
+      return bcrypt.compare(password, this.password);
+    }
+  }
 
-/**
- * User Schema
- */
-const UserSchema = new Schema<IUser>(
-  {
-    name: { type: String, required: true, trim: true },
-    email: { type: String, required: true, unique: true, lowercase: true, trim: true, index: true },
-    password: { type: String, required: true },
-    role: { type: String, enum: ["user", "admin"], default: "user" },
-    preferences: { type: [String], default: [] }, // User interests for recommendations
-    isActive: { type: Boolean, default: true }, // Soft deletion flag
-  },
-  { timestamps: true }
-);
+  User.init(
+    {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+        allowNull: false,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: { isEmail: true },
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      role: {
+        type: DataTypes.ENUM("user", "admin"),
+        defaultValue: "user",
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+      },
+    },
+    {
+      sequelize,
+      modelName: "User",
+      tableName: "users",
+      timestamps: true,
+      hooks: {
+        // 🔹 Hash password before saving
+        beforeCreate: async (user) => {
+          user.password = await bcrypt.hash(user.password, 10);
+        },
+      },
+    }
+  );
 
-/**
- * Hash password before saving
- */
-UserSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
-});
-
-/**
- * Compare input password with stored hash
- */
-UserSchema.methods.comparePassword = async function (candidatePassword: string): Promise<boolean> {
-  return bcrypt.compare(candidatePassword, this.password);
+  return User;
 };
-
-/**
- * Index for efficient user lookups
- */
-UserSchema.index({ email: 1 });
-
-export default mongoose.model<IUser>("User", UserSchema);
 

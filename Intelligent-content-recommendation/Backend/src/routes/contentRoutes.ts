@@ -4,6 +4,7 @@ import ContentController from "../controllers/contentController";
 import { authenticateUser } from "../middleware/authMiddleware";
 import { validateRequest } from "../middleware/validateRequest";
 import { requestLogger } from "../middleware/requestLogger";
+import { cacheMiddleware } from "../utils/cache";
 
 const router = express.Router();
 
@@ -48,4 +49,6 @@ router.delete(
 );
 
 export default router;
+
+router.get("/trending", cacheMiddleware, getTrendingContent);
 
