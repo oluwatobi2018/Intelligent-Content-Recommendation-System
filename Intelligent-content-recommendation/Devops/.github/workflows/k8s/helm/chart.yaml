@@ -1,0 +1,6 @@
+apiVersion: v2
+name: intelligent-content-recommendation
+description: A Helm chart for deploying the Intelligent Content Recommendation application
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
