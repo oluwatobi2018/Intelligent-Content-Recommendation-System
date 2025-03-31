@@ -11,6 +11,7 @@ import { errorMiddleware } from "./middlewares/errorMiddleware";
 import { requestLogger } from "./middlewares/requestLogger";
 import contentRoutes from "./routes/contentRoutes";
 import authRoutes from "./routes/authRoutes";
+import metricsRouter from "./middleware/metrics";
 
 // Load environment variables
 dotenv.config();
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded data
 app.use(cookieParser()); // Parse cookies
 app.use(morgan("dev")); // Log requests
 app.use(requestLogger); // Custom request logger
+app.use("/monitoring", metricsRouter); // Prometheus metrics endpoint
 
 // 🚀 Rate Limiting (prevents DDoS & brute-force attacks)
 const limiter = rateLimit({
