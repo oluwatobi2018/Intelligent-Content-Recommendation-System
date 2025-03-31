@@ -9,8 +9,14 @@
     "build": "next build",
     "serve": "next start",
     "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "test:unit": "jest src/**/*.test.ts",
+    "test:integration": "jest src/integration/**/*.test.ts",
+    "test:e2e": "jest src/e2e/**/*.test.ts",
     "lint": "eslint . --fix",
     "format": "prettier --write ."
+    
+   
   },
   "dependencies": {
     "express": "^4.18.2",
