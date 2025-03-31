@@ -1,7 +1,7 @@
 {
   "name": "fullstack-app",
   "version": "1.0.0",
-  "description": "A full-stack application with Node.js, Express, Next.js, and database support.",
+  "description": "A SaaS-based intelligent content recommendation platform",
   "main": "src/index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
