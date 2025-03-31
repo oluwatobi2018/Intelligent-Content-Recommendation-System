@@ -4,7 +4,11 @@ Thumbs.db
 *.log
 *.env
 *.local
-
+# Ignore environment files
+.env
+.env.*  # Ignore all environment-specific files like .env.test, .env.production, etc.
+*.local  # Ignore local environment files
+*.local.*  # Ignore all local environment-specific files like .env.local, .env.test.local, etc.
 # Node.js dependencies
 node_modules/
 npm-debug.log*
