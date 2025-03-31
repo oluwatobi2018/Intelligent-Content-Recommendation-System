@@ -1,43 +1,29 @@
-
 import express from "express";
-import { body } from "express-validator";
-import AuthController from "../controllers/authController";
-import { validateRequest } from "../middleware/validateRequest";
-import { requestLogger } from "../middleware/requestLogger";
+import passport from "passport";
+import { generateAccessToken } from "../services/OAuthService";
 
 const router = express.Router();
 
-/**
- * @route POST /auth/register
- * @desc Register a new user
- * @access Public
- */
-router.post(
-  "/register",
-  requestLogger,
-  [
-    body("name").notEmpty().withMessage("Name is required"),
-    body("email").isEmail().withMessage("Valid email is required"),
-    body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
-  ],
-  validateRequest,
-  AuthController.register
+router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  (req, res) => {
+    const accessToken = generateAccessToken(req.user as any);
+    res.redirect(`/dashboard?token=${accessToken}`);
+  }
 );
 
-/**
- * @route POST /auth/login
- * @desc Authenticate user and return token
- * @access Public
- */
-router.post(
-  "/login",
-  requestLogger,
-  [
-    body("email").isEmail().withMessage("Valid email is required"),
-    body("password").notEmpty().withMessage("Password is required"),
-  ],
-  validateRequest,
-  AuthController.login
+router.get("/github", passport.authenticate("github", { scope: ["user:email"] }));
+
+router.get(
+  "/github/callback",
+  passport.authenticate("github", { failureRedirect: "/login" }),
+  (req, res) => {
+    const accessToken = generateAccessToken(req.user as any);
+    res.redirect(`/dashboard?token=${accessToken}`);
+  }
 );
 
 export default router;
