@@ -1,22 +1,22 @@
 import http from "http";
 import dotenv from "dotenv";
+import express from "express";
 import app from "./app";
 import connectDB from "./config/database";
+import { encryptionMiddleware, decryptionMiddleware } from "./middlewares/encryptionMiddleware";
 
 // Load environment variables
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 
-// Graceful shutdown handler
+// Function to gracefully shut down the server
 const shutdown = async (server: http.Server) => {
   console.log("🛑 Shutting down server...");
 
   try {
     // Close server
-    server.close(() => {
-      console.log("✅ HTTP server closed.");
-    });
+    server.close(() => console.log("✅ HTTP server closed."));
 
     // Close database connection
     await connectDB().disconnect();
@@ -28,7 +28,7 @@ const shutdown = async (server: http.Server) => {
   }
 };
 
-// Start server only after successful DB connection
+// Start the server only after a successful database connection
 connectDB()
   .then(() => {
     const server = http.createServer(app);
@@ -59,3 +59,15 @@ connectDB()
     console.error("❌ Database connection failed:", err);
     process.exit(1);
   });
+
+// Initialize Express and Apply Middleware
+app.use(express.json());
+
+// Apply encryption middleware
+app.use(encryptionMiddleware);
+app.use(decryptionMiddleware);
+
+// Example route
+app.post("/secure-data", (req, res) => {
+  res.json({ message: "Data received securely", decryptedBody: req.body });
+});
