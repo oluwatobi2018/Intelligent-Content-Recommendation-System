@@ -8,7 +8,7 @@ export default function Home() {
         <title>AI Content Recommendation Platform</title>
         <meta name="description" content="An AI-powered platform delivering personalized content recommendations." />
         <meta name="keywords" content="AI, content recommendation, machine learning, personalization" />
-        <meta name="author" content="Your Name" />
+        <meta name="author" content="Oluwatobi Adeogun" />
         <meta property="og:title" content="AI Content Recommendation Platform" />
         <meta property="og:description" content="Discover AI-powered personalized content just for you!" />
       </Head>

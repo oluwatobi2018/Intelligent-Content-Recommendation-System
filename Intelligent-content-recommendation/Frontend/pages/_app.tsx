@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       {/* Global Meta Information */}
       <Head>
-        <title>My Next.js App</title>
+        <title>Intelligent AI Recommendation System</title>
         <meta name="description" content="A powerful Next.js application with enhanced features." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
