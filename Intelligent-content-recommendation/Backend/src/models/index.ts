@@ -2,6 +2,8 @@ import User from "./User";
 import Content from "./Content";
 import Recommendation from "./Recommendation";
 import Analytics from "./Analytics";
+import Notifications from "./Notifications";
+
 
 /**
  * Exports all models from a single entry point.
