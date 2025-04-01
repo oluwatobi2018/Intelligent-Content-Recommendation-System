@@ -729,6 +729,10 @@ Uses Redis caching for fast retrieval.
 
 Deployed on Kubernetes with auto-scaling.
 
+Vercel Deployment URL: ![image](https://github.com/user-attachments/assets/c4207358-87f9-46ce-a83b-f36df0d83ad8)
+https://vercel.com/oluwatobichris88gmailcoms-projects/intelligent-content-recommendation-system
+
+
 ## 5. Future Improvements
 Deep Learning-based models: Implement Transformer-based BERT4Rec for sequential recommendations.
 
