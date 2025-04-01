@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
+    "start": "node api/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "next lint"
   },
   "dependencies": {
