@@ -730,7 +730,7 @@ Uses Redis caching for fast retrieval.
 
 Deployed on Kubernetes with auto-scaling.
 
-Vercel Deployment URL: https://vercel.com/oluwatobichris88gmailcoms-projects/intelligent-content-recommendation-system/5TiyEQ4MtXjWmcddHJQijmWL42m4
+Vercel Deployment URL: https://intelligent-content-recommendation-system-jyeo6erdx.vercel.app/
 
 
 ## 5. Future Improvements
