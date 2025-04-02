@@ -1,0 +1,21 @@
+/* fonts.css */
+@font-face {
+    font-family: 'CustomFont';
+    src: url('./CustomFont-Regular.woff2') format('woff2'),
+         url('./CustomFont-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CustomFont';
+    src: url('./CustomFont-Bold.woff2') format('woff2'),
+         url('./CustomFont-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Example usage */
+body {
+    font-family: 'CustomFont', sans-serif;
+}
