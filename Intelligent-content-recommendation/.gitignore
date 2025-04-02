@@ -372,4 +372,6 @@ __pycache__/
 *.pyd
 *.
 ::contentReference[oaicite:0]{index=0}
- 
+ # Environment files
+.env
+.env.test
