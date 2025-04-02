@@ -24,9 +24,7 @@ app.use('/api/content', contentRoutes);
 app.use('/api/index', indexRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/oauth', oauthRoutes);
-app.use('/api/admin', adminRoutes);
-app.use('/api/feedback', feedbackRoutes);
-app.use('/api/ai', aiRoutes);
+
 
 
 // Error Handling
