@@ -1,22 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ESNext",                 // Use latest JavaScript features
-    "module": "CommonJS",               // Keep Node.js compatibility
-    "moduleResolution": "Node",         // Properly resolve Node modules
-    "outDir": "./dist",                 // Output compiled files
-    "rootDir": "./src",                 // Define source directory
-    "strict": true,                     // Enable all strict type checks
-    "esModuleInterop": true,            // Improve module imports
-    "resolveJsonModule": true,          // Allow importing JSON files
-    "forceConsistentCasingInFileNames": true, // Ensure case sensitivity
-    "skipLibCheck": true,               // Skip type checks for dependencies
-    "allowSyntheticDefaultImports": true, // Allow default imports for CommonJS
-    "noUnusedLocals": true,             // Report unused local variables
-    "noUnusedParameters": true,         // Report unused function parameters
-    "noImplicitReturns": true,          // Ensure functions always return a value
-    "noFallthroughCasesInSwitch": true, // Prevent unintentional fallthrough in switch
-    "noImplicitAny": false              // Keep implicit `any` for flexibility
+    "baseUrl": "./",
+    "paths": {
+      "@store/*": ["Frontend/store/*"],
+      "@validators/*": ["Backend/validators/*"]
+    },
+    "module": "commonjs",
+    "target": "es6",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true
   },
-  "include": ["src"],                   
-  "exclude": ["node_modules", "dist", "**/*.test.ts"]  // Exclude compiled files & tests
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
