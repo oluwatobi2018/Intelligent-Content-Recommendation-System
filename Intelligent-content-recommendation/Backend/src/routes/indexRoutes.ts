@@ -1,32 +1,52 @@
+// 🔹 External Libraries
 import express from "express";
-import rateLimit from "express-rate-limit";  // ✅ Import rate limiter
+import rateLimit from "express-rate-limit";
+
+// 🔹 Internal Modules
 import authRoutes from "./authRoutes";
 import contentRoutes from "./contentRoutes";
 import recommendationRoutes from "./recommendationRoutes";
 import userRoutes from "./userRoutes";
 import analyticsRoutes from "./analyticsRoutes";
+
+// 🔹 Middleware
 import { requestLogger } from "../middleware/requestLogger";
 import { errorMiddleware } from "../middleware/errorMiddleware";
 
+// 🔹 Initialize Router
 const router = express.Router();
 
-// 🔹 Apply Rate Limiting
-const apiLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // Max 100 requests per window per IP
-    message: { error: "Too many requests, please try again later." },
-    headers: true,
-});
+// 🔹 Rate Limiter Configuration
+const createRateLimiter = (maxRequests: number, windowMinutes: number) =>
+    rateLimit({
+        windowMs: windowMinutes * 60 * 1000, // Convert minutes to milliseconds
+        max: maxRequests,
+        message: { error: "Too many requests, please try again later." },
+        headers: true,
+    });
 
-// 🔹 Global Request Logging Middleware
+const apiLimiter = createRateLimiter(100, 15); // 100 requests per 15 minutes
+
+// 🔹 Global Middleware
 router.use(requestLogger);
 
-// 🔹 API Route Definitions with Rate Limiting
-router.use("/auth", apiLimiter, authRoutes);
-router.use("/content", apiLimiter, contentRoutes);
-router.use("/recommendations", apiLimiter, recommendationRoutes);
-router.use("/users", apiLimiter, userRoutes);
-router.use("/analytics", analyticsRoutes); // Analytics may not need rate limiting
+// 🔹 API Routes
+const routes = [
+    { path: "/auth", handler: authRoutes, applyRateLimiter: true },
+    { path: "/content", handler: contentRoutes, applyRateLimiter: true },
+    { path: "/recommendations", handler: recommendationRoutes, applyRateLimiter: true },
+    { path: "/users", handler: userRoutes, applyRateLimiter: true },
+    { path: "/analytics", handler: analyticsRoutes, applyRateLimiter: false }, // No rate limiter for analytics
+];
+
+// 🔹 Register Routes Dynamically
+routes.forEach(({ path, handler, applyRateLimiter }) => {
+    if (applyRateLimiter) {
+        router.use(path, apiLimiter, handler);
+    } else {
+        router.use(path, handler);
+    }
+});
 
 // 🔹 Global Error Handling Middleware
 router.use(errorMiddleware);
