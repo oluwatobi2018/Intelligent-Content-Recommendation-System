@@ -8,6 +8,10 @@ The AI Engine is a core component of the Intelligent Content Recommendation Syst
 - **Recommendation Generation**: Uses machine learning models to generate personalized content recommendations.
 - **Scalability**: Designed to handle large datasets efficiently.
 
+## Architecture
+
+The AI Engine processes input data, applies machine learning models, and generates personalized content recommendations. It is designed to handle large datasets efficiently using techniques such as batching and parallel processing.
+
 ## Installation
 
 1. Clone the repository:
@@ -28,12 +32,3 @@ The AI Engine is a core component of the Intelligent Content Recommendation Syst
 Run the AI Engine:
 ```bash
 python main.py
-```
-
-## Contributing
-
-Contributions are welcome! Please follow the [contribution guidelines](../CONTRIBUTING.md).
-
-## License
-
-This project is licensed under the [MIT License](../LICENSE).
