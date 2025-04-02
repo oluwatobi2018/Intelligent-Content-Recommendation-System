@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 📌 AI-Powered Content Recommendation Platform
 
 ## 🚀 Overview
@@ -925,3 +926,6 @@ This documentation provides a structured overview of the API endpoints, request/
 📌 **License:** MIT License
 📌 **Contributors Welcome!** Feel free to open a PR!
 
+=======
+# Intelligent-Content-Recommendation-System
+>>>>>>> 5e3842ec26e3e00a997188e98cf9ea1ceaa8d5ba
