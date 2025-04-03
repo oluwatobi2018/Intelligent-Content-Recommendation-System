@@ -1,13 +1,28 @@
 {
   "compilerOptions": {
+<<<<<<< HEAD
+=======
+    "baseUrl": "./",
+    "paths": {
+      "@store/*": ["Frontend/store/*"],
+      "@validators/*": ["Backend/validators/*"]
+    },
+>>>>>>> abfae1f8b23c3cf199398c06f20134e39e0cd0d6
     "module": "commonjs",
     "target": "es6",
     "outDir": "./dist",
     "rootDir": "./src",
+<<<<<<< HEAD
     "resolveJsonModule": true,
     "esModuleInterop": true,
+=======
+>>>>>>> abfae1f8b23c3cf199398c06f20134e39e0cd0d6
     "strict": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> abfae1f8b23c3cf199398c06f20134e39e0cd0d6
